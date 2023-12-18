@@ -1,34 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// import 'package:flutter_riverpod_todo_app/providers/providers.dart';
-// import 'package:flutter_riverpod_todo_app/utils/utils.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import '../providers/date_provider.dart';
+import '../providers/time_provider.dart';
+import '../utils/helpers.dart';
 import 'common_text_field.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectDateTime extends ConsumerWidget {
   const SelectDateTime({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final time = ref.watch(timeProvider);
-    // final date = ref.watch(dateProvider);
+    final time = ref.watch(timeProvider);
+    final date = ref.watch(dateProvider);
 
     return Row(
       children: [
         Expanded(
           child: CommonTextField(
             title: 'Date',
-            // hintText: Helpers.dateFormatter(date),
-
-            hintText: '',
-
+            hintText: Helpers.dateFormatter(date),
             readOnly: true,
             suffixIcon: IconButton(
-//              onPressed: () => Helpers.selectDate(context, ref),
-              onPressed: () {},
+              onPressed: () => Helpers.selectDate(context, ref),
               icon: const FaIcon(FontAwesomeIcons.calendar),
             ),
           ),
@@ -37,8 +33,7 @@ class SelectDateTime extends ConsumerWidget {
         Expanded(
           child: CommonTextField(
             title: 'Time',
-//            hintText: Helpers.timeToString(time),
-            hintText: '',
+            hintText: Helpers.timeToString(time),
             readOnly: true,
             suffixIcon: IconButton(
               onPressed: () => _selectTime(context, ref),
@@ -51,12 +46,10 @@ class SelectDateTime extends ConsumerWidget {
   }
 
   void _selectTime(BuildContext context, WidgetRef ref) async {
-    TimeOfDay? pickedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
+    TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
     if (pickedTime != null) {
-//      ref.read(timeProvider.notifier).state = pickedTime;
+      ref.read(timeProvider.notifier).state = pickedTime;
     }
   }
 }
