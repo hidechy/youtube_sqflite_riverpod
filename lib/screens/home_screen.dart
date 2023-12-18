@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import '../widgets/display_white_text.dart';
+import '../widgets/widgets.dart';
 import '../utils/utils.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -27,7 +27,6 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Gap(30),
                       DisplayWhiteText(text: 'Aug 7, 2023', fontSize: 20),
-                      Gap(20),
                       DisplayWhiteText(
                         text: 'My Todo List',
                         fontSize: 40,
@@ -47,20 +46,25 @@ class HomeScreen extends StatelessWidget {
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    width: deviceSize.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: colors.primaryContainer,
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 8,
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) {
-                        return const Text('home');
-                      },
+                  const TaskList(
+                    tasks: [],
+                  ),
+                  const Gap(20),
+                  Text(
+                    'Completed.',
+                    style: context.textTheme.headlineMedium,
+                  ),
+                  const TaskList(
+                    tasks: [],
+                    isCompletedTasks: true,
+                  ),
+                  const Gap(20),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const DisplayWhiteText(
+                      text: 'Add New Tasks.',
                     ),
                   ),
                 ],
