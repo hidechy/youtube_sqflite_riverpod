@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/models/task.dart';
 
+import 'task_details.dart';
 import 'widgets.dart';
 
 import '../utils/utils.dart';
@@ -39,7 +40,14 @@ class TaskList extends StatelessWidget {
                 final task = tasks[index];
 
                 return InkWell(
-                  onTap: () async {},
+                  onTap: () async {
+                    await showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return TaskDetails(task: task);
+                      },
+                    );
+                  },
                   onLongPress: () {},
                   child: TaskCard(task: task),
                 );
