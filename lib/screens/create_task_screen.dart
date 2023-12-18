@@ -3,9 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
+import '../config/routes/routes_location.dart';
+import '../data/models/task.dart';
+import '../providers/category_provider.dart';
+import '../providers/date_provider.dart';
+import '../providers/task/task_provider.dart';
+import '../providers/time_provider.dart';
+import '../utils/app_alerts.dart';
 import '../utils/extensions.dart';
 
+import '../utils/helpers.dart';
 import '../widgets/categories_selection.dart';
 import '../widgets/common_text_field.dart';
 import '../widgets/display_white_text.dart';
@@ -67,8 +76,7 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
               ),
               const Gap(30),
               ElevatedButton(
-//                onPressed: _createTask,
-                onPressed: () {},
+                onPressed: _createTask,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: DisplayWhiteText(
@@ -84,14 +92,13 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
     );
   }
 
-/*
-
   void _createTask() async {
     final title = _titleController.text.trim();
     final note = _noteController.text.trim();
     final time = ref.watch(timeProvider);
     final date = ref.watch(dateProvider);
     final category = ref.watch(categoryProvider);
+
     if (title.isNotEmpty) {
       final task = Task(
         title: title,
@@ -110,6 +117,4 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
       AppAlerts.displaySnackbar(context, 'Title cannot be empty');
     }
   }
-
-  */
 }
