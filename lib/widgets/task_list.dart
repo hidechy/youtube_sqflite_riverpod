@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/models/task.dart';
+
 import 'widgets.dart';
 
 import '../utils/utils.dart';
@@ -30,13 +31,23 @@ class TaskList extends StatelessWidget {
                 style: context.textTheme.headlineSmall,
               ),
             )
-          : ListView.builder(
+          : ListView.separated(
               shrinkWrap: true,
               itemCount: tasks.length,
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               itemBuilder: (context, index) {
-                return const Text('home');
+                final task = tasks[index];
+
+                return InkWell(
+                  onTap: () async {},
+                  onLongPress: () {},
+                  child: TaskCard(task: task),
+                );
               },
+              separatorBuilder: (BuildContext context, int index) => const Divider(
+                color: Colors.black,
+                thickness: 2,
+              ),
             ),
     );
   }
